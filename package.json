@@ -1,0 +1,19 @@
+{
+  "name": "btl-blockchain-certificate",
+  "version": "1.0.0",
+  "description": "Hệ thống quản lý và xác thực bằng cấp trên nền tảng Blockchain",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "node": "npx hardhat node",
+    "deploy": "npx hardhat run scripts/deploy.js --network localhost",
+    "deploy:sepolia": "npx hardhat run scripts/deploy.js --network sepolia"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "hardhat": "^2.22.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

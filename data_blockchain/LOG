@@ -1,0 +1,5 @@
+2026/05/11-16:02:48.222 34cc Recovering log #9
+2026/05/11-16:02:48.222 34cc Level-0 table #11: started
+2026/05/11-16:02:48.238 34cc Level-0 table #11: 7226 bytes OK
+2026/05/11-16:02:48.245 34cc Delete type=0 #9
+2026/05/11-16:02:48.245 34cc Delete type=3 #7

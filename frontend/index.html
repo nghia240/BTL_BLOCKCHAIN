@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hệ thống quản lý và xác thực bằng cấp trên nền tảng Blockchain - Đảm bảo tính minh bạch và chống giả mạo">
+    <title>CertChain - Xác thực Bằng cấp Blockchain</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <div class="logo-icon">⛓️</div>
+                <span class="logo-text">CertChain</span>
+            </div>
+            <nav class="nav">
+                <a href="#issue" class="nav-link" id="nav-issue">Cấp bằng</a>
+                <a href="#verify" class="nav-link" id="nav-verify">Xác thực</a>
+                <a href="#lookup" class="nav-link" id="nav-lookup">Tra cứu</a>
+            </nav>
+            <div class="wallet-section">
+                <button id="btn-connect-wallet" class="btn btn-gradient">
+                    <span class="btn-icon">🦊</span> Kết nối Ví
+                </button>
+                <div id="wallet-info" class="wallet-info hidden">
+                    <span class="wallet-dot"></span>
+                    <span id="wallet-address" class="wallet-address"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg-effects">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+        </div>
+        <div class="container hero-content">
+            <h1 class="hero-title">
+                Xác thực Bằng cấp<br>
+                <span class="gradient-text">trên Blockchain</span>
+            </h1>
+            <p class="hero-subtitle">
+                Hệ thống quản lý và xác thực bằng cấp minh bạch, chống giả mạo, 
+                sử dụng công nghệ Smart Contract trên mạng Ethereum.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number" id="stat-total">0</span>
+                    <span class="stat-label">Bằng đã cấp</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number stat-active" id="stat-active">0</span>
+                    <span class="stat-label">Đang hiệu lực</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number stat-verified">∞</span>
+                    <span class="stat-label">Lượt xác thực</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Tab Navigation -->
+            <div class="tabs">
+                <button class="tab active" data-tab="issue" id="tab-issue">
+                    <span class="tab-icon">📜</span> Cấp bằng mới
+                </button>
+                <button class="tab" data-tab="verify" id="tab-verify">
+                    <span class="tab-icon">🔍</span> Xác thực bằng
+                </button>
+                <button class="tab" data-tab="lookup" id="tab-lookup">
+                    <span class="tab-icon">📋</span> Tra cứu
+                </button>
+                <button class="tab" data-tab="revoke" id="tab-revoke">
+                    <span class="tab-icon">🚫</span> Thu hồi
+                </button>
+            </div>
+
+            <!-- Issue Certificate Panel -->
+            <div class="tab-panel active" id="panel-issue">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h2>Cấp bằng cấp mới</h2>
+                        <p class="panel-desc">Chỉ Admin (Trường đại học) mới có quyền thực hiện thao tác này.</p>
+                        <span class="badge badge-admin">Yêu cầu quyền Admin</span>
+                    </div>
+                    <form id="form-issue" class="form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="input-cert-id">Mã bằng cấp <span class="required">*</span></label>
+                                <input type="text" id="input-cert-id" placeholder="VD: CERT-2024-001" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-student-name">Tên sinh viên <span class="required">*</span></label>
+                                <input type="text" id="input-student-name" placeholder="VD: Nguyễn Văn A" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-degree">Loại bằng <span class="required">*</span></label>
+                                <select id="input-degree" required>
+                                    <option value="">-- Chọn loại bằng --</option>
+                                    <option value="Cử nhân">Cử nhân</option>
+                                    <option value="Kỹ sư">Kỹ sư</option>
+                                    <option value="Thạc sĩ">Thạc sĩ</option>
+                                    <option value="Tiến sĩ">Tiến sĩ</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-major">Chuyên ngành <span class="required">*</span></label>
+                                <input type="text" id="input-major" placeholder="VD: Công nghệ Thông tin" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-content">Nội dung bằng (để tạo Hash) <span class="required">*</span></label>
+                            <textarea id="input-content" rows="3" placeholder="Nhập toàn bộ nội dung bằng cấp để hệ thống tạo mã Hash SHA-256..." required></textarea>
+                            <div class="hash-preview" id="hash-preview">
+                                <span class="hash-label">SHA-256 Hash:</span>
+                                <code id="hash-value">Chưa có dữ liệu</code>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-gradient btn-lg" id="btn-issue">
+                            <span class="btn-icon">⛓️</span> Cấp bằng & Lưu lên Blockchain
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Verify Certificate Panel -->
+            <div class="tab-panel" id="panel-verify">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h2>Xác thực bằng cấp</h2>
+                        <p class="panel-desc">Nhập mã bằng và nội dung để kiểm tra tính hợp lệ trên Blockchain.</p>
+                        <span class="badge badge-public">Công khai - Ai cũng có thể xác thực</span>
+                    </div>
+                    <form id="form-verify" class="form">
+                        <div class="form-group">
+                            <label for="input-verify-id">Mã bằng cấp <span class="required">*</span></label>
+                            <input type="text" id="input-verify-id" placeholder="VD: CERT-2024-001" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-verify-content">Nội dung bằng cấp <span class="required">*</span></label>
+                            <textarea id="input-verify-content" rows="3" placeholder="Nhập nội dung bằng cấp để so khớp Hash..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gradient btn-lg" id="btn-verify">
+                            <span class="btn-icon">🔍</span> Xác thực ngay
+                        </button>
+                    </form>
+                    <!-- Verification Result -->
+                    <div id="verify-result" class="result-box hidden"></div>
+                </div>
+            </div>
+
+            <!-- Lookup Panel -->
+            <div class="tab-panel" id="panel-lookup">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h2>Tra cứu thông tin bằng cấp</h2>
+                        <p class="panel-desc">Tra cứu thông tin chi tiết của bằng cấp đã được lưu trên Blockchain.</p>
+                    </div>
+                    <form id="form-lookup" class="form">
+                        <div class="form-group">
+                            <label for="input-lookup-id">Mã bằng cấp <span class="required">*</span></label>
+                            <input type="text" id="input-lookup-id" placeholder="VD: CERT-2024-001" required>
+                        </div>
+                        <button type="submit" class="btn btn-gradient btn-lg" id="btn-lookup">
+                            <span class="btn-icon">📋</span> Tra cứu
+                        </button>
+                    </form>
+                    <div id="lookup-result" class="result-box hidden"></div>
+                </div>
+            </div>
+
+            <!-- Revoke Panel -->
+            <div class="tab-panel" id="panel-revoke">
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h2>Thu hồi bằng cấp</h2>
+                        <p class="panel-desc">Thu hồi bằng cấp đã cấp. Thao tác này không thể hoàn tác.</p>
+                        <span class="badge badge-admin">Yêu cầu quyền Admin</span>
+                    </div>
+                    <form id="form-revoke" class="form">
+                        <div class="form-group">
+                            <label for="input-revoke-id">Mã bằng cấp cần thu hồi <span class="required">*</span></label>
+                            <input type="text" id="input-revoke-id" placeholder="VD: CERT-2024-001" required>
+                        </div>
+                        <button type="submit" class="btn btn-danger btn-lg" id="btn-revoke">
+                            <span class="btn-icon">🚫</span> Thu hồi bằng cấp
+                        </button>
+                    </form>
+                    <div id="revoke-result" class="result-box hidden"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Transaction Log -->
+    <section class="tx-log-section">
+        <div class="container">
+            <h2 class="section-title">📊 Nhật ký giao dịch</h2>
+            <div class="tx-log" id="tx-log">
+                <div class="tx-empty">Chưa có giao dịch nào. Hãy kết nối ví và thực hiện thao tác.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>&copy; 2024 CertChain - Hệ thống xác thực bằng cấp Blockchain</p>
+            <p class="footer-sub">Bài tập lớn - Công nghệ Blockchain</p>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
