@@ -7,9 +7,9 @@
 
 Hệ thống quản lý và xác thực văn bằng học thuật phi tập trung dựa trên công nghệ Blockchain.
 
-<p align="center">
-  <img src="./Poster/poster.png" alt="CertChain Poster" width="600" />
-</p>
+## 🎨 Poster Dự án
+
+![CertChain Poster](Poster/poster.png)
 
 ---
 
