@@ -9,7 +9,9 @@ Hệ thống quản lý và xác thực văn bằng học thuật phi tập trun
 
 ## 🎨 Poster Dự án
 
-![CertChain Poster](Poster.png)
+<p align="center">
+  <img src="Poster.png" alt="Blockchain Charity System Poster" width="850">
+</p>
 
 ---
 
