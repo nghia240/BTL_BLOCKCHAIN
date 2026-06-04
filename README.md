@@ -9,7 +9,8 @@ Hệ thống quản lý và xác thực văn bằng học thuật phi tập trun
 
 ## 🎨 Poster Dự án
 
-![CertChain Poster](poster.png)
+![CertChain Poster](./Poster/poster.png)
+
 ---
 
 ## ⚡ Tính năng cốt lõi (Features)
